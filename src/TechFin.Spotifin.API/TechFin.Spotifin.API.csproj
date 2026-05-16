@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TechFin.Spotifin.Aplicacao\TechFin.Spotifin.Aplicacao.csproj" />
     <ProjectReference Include="..\TechFin.Spotifin.Contratos\TechFin.Spotifin.Contratos.csproj" />
+    <ProjectReference Include="..\TechFin.Spotifin.Infra\TechFin.Spotifin.Infra.csproj" />
   </ItemGroup>
 
 </Project>

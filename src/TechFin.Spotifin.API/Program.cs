@@ -1,10 +1,16 @@
+using TechFin.Spotifin.Aplicacao;
+using TechFin.Spotifin.Infra;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services
+    .AddAplicacao()
+    .AddInfra();
 
 var app = builder.Build();
 
