@@ -1,0 +1,14 @@
+@host = http://localhost:5055
+@usuarioId = B20DAF60-6342-499E-97A3-0D510613CA07
+
+
+// Criar uma nova assinatura para um usuário
+POST {{host}}/assinaturas
+Content-Type: application/json
+{
+  "TipoAssinatura": "Gratis",
+  "UsuarioId": "{{usuarioId}}"
+}
+
+
+
