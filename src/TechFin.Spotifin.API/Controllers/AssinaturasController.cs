@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TechFin.Spotifin.Aplicacao.Servicos;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using TechFin.Spotifin.Aplicacao.Assinaturas.Comandos.CriarAssinatura;
 using TechFin.Spotifin.Contratos.Assinaturas;
 
 namespace TechFin.Spotifin.API.Controllers;
@@ -8,20 +9,23 @@ namespace TechFin.Spotifin.API.Controllers;
 [Route("[controller]")]
 public class AssinaturasController : ControllerBase
 {
-    private readonly IAssinaturasServico _assinaturasServico;
+    private readonly ISender _mediator;
 
-    public AssinaturasController(IAssinaturasServico assinaturasServico)
+    public AssinaturasController(ISender mediator)
     {
-        _assinaturasServico = assinaturasServico;
+        _mediator = mediator;
     }
 
     [HttpPost]
-    public IActionResult CriarAssinatura(CriarAssinaturaRequest request)
+    public async Task<IActionResult> CriarAssinaturaAsync(CriarAssinaturaRequest request)
     {
-        var assinaturaId = _assinaturasServico.CriarAssinatura(request.TipoAssinatura.ToString(), request.UsuarioId);
+        var comando = new CriarAssinaturaComando(request.TipoAssinatura.ToString(), request.UsuarioId);
+        
+        var resultado = await _mediator.Send(comando);
 
-        var resultado = new AssinaturaResponse(assinaturaId, request.TipoAssinatura);
-
-        return Ok(resultado);
+        return resultado.MatchFirst(
+            assinatura => Ok(new AssinaturaResponse(assinatura.Id, request.TipoAssinatura)),
+            erro => Problem()
+        );       
     }
 }

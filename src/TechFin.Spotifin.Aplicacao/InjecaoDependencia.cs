@@ -6,8 +6,7 @@ public static class InjecaoDependencia
 {
     public static IServiceCollection AddAplicacao(this IServiceCollection services)
     {
-        services.AddScoped<Servicos.IAssinaturasServico, Servicos.AssinaturasServico>();
-
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(InjecaoDependencia)));
         return services;
     }
 }
