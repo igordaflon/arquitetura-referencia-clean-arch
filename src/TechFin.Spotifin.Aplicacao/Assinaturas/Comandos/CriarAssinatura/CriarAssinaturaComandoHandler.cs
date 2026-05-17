@@ -8,10 +8,12 @@ namespace TechFin.Spotifin.Aplicacao.Assinaturas.Comandos.CriarAssinatura;
 public class CriarAssinaturaComandoHandler : IRequestHandler<CriarAssinaturaComando, ErrorOr<Assinatura>>
 {
     private readonly IAssinaturasRepositorio _assinaturasRepositorio;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarAssinaturaComandoHandler(IAssinaturasRepositorio assinaturasRepositorio)
+    public CriarAssinaturaComandoHandler(IAssinaturasRepositorio assinaturasRepositorio, IUnitOfWork unitOfWork)
     {
         _assinaturasRepositorio = assinaturasRepositorio;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ErrorOr<Assinatura>> Handle(CriarAssinaturaComando request, CancellationToken cancellationToken)
@@ -21,7 +23,8 @@ public class CriarAssinaturaComandoHandler : IRequestHandler<CriarAssinaturaComa
             Id = Guid.NewGuid()
         };
 
-        _assinaturasRepositorio.Adicionar(assinatura);
+        await _assinaturasRepositorio.AdicionarAsync(assinatura);
+        await _unitOfWork.CommitAsync();
 
         return assinatura;
     }

@@ -4,5 +4,5 @@ namespace TechFin.Spotifin.Aplicacao.Core.Interfaces;
 
 public interface IAssinaturasRepositorio
 {
-    void Adicionar(Assinatura assinatura);
+    Task AdicionarAsync(Assinatura assinatura);
 }
