@@ -18,10 +18,7 @@ public class CriarAssinaturaComandoHandler : IRequestHandler<CriarAssinaturaComa
 
     public async Task<ErrorOr<Assinatura>> Handle(CriarAssinaturaComando request, CancellationToken cancellationToken)
     {
-        var assinatura = new Assinatura
-        {
-            Id = Guid.NewGuid()
-        };
+        var assinatura = new Assinatura(request.TipoAssinatura, request.UsuarioId);
 
         await _assinaturasRepositorio.AdicionarAsync(assinatura);
         await _unitOfWork.CommitAsync();

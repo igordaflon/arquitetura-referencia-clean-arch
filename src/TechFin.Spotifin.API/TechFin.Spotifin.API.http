@@ -1,6 +1,12 @@
 @host = http://localhost:5055
-@usuarioId = B20DAF60-6342-499E-97A3-0D510613CA07
+@usuarioId = 9bb04694-a821-43d1-a802-7723bbfed0e5
 
+@assinaturaId = ce7a3e1b-356e-4d04-818c-827cd54bab7e
+
+// Obter as assinaturas de um usuário específico
+GET {{host}}/assinaturas/{{assinaturaId}}
+
+###
 
 // Criar uma nova assinatura para um usuário
 POST {{host}}/assinaturas
@@ -9,6 +15,3 @@ Content-Type: application/json
   "TipoAssinatura": "Gratis",
   "UsuarioId": "{{usuarioId}}"
 }
-
-
-
