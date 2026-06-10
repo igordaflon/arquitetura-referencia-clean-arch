@@ -1,0 +1,6 @@
+@Spotifin.Api_HostAddress = http://localhost:5210
+
+GET {{Spotifin.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
