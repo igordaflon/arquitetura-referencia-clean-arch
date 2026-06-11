@@ -1,4 +1,4 @@
 public record CriarAssinaturaRequest(
-    TipoAssinatura TipoAssinatura,
+    TipoAssinaturaEnum TipoAssinatura,
     Guid UsuarioId
 );

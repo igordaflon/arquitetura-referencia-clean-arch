@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum TipoAssinatura
+public enum TipoAssinaturaEnum
 {
     Gratuita,
     Basica,
