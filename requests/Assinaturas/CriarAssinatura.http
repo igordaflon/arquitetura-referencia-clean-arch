@@ -1,0 +1,15 @@
+@host=http://localhost:5267
+@usuarioId=ae58c71e-5ab8-4d22-992c-5bdc196b8f3f
+
+POST {{host}}/Assinaturas
+Content-Type: application/json
+
+{
+    "TipoAssinatura": "Gratuita", 
+    "UsuarioId": "{{usuarioId}}"
+}
+
+# {
+#     "Id": "Guid",
+#     "TipoAssinatura": "Gratuita", // Basica, Pro
+# }

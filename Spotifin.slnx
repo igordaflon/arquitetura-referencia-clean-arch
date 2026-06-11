@@ -2,6 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/Spotifin.Api/Spotifin.Api.csproj" />
     <Project Path="src/Spotifin.Aplicacao/Spotifin.Aplicacao.csproj" />
+    <Project Path="src/Spotifin.Contratos/Spotifin.Contratos.csproj" />
     <Project Path="src/Spotifin.Dominio/Spotifin.Dominio.csproj" />
     <Project Path="src/Spotifin.Infraestrutura/Spotifin.Infraestrutura.csproj" />
   </Folder>
