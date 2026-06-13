@@ -5,7 +5,7 @@ POST {{host}}/Assinaturas
 Content-Type: application/json
 
 {
-    "TipoAssinatura": "Gratuita", 
+    "TipoAssinatura": "Pro", 
     "UsuarioId": "{{usuarioId}}"
 }
 
