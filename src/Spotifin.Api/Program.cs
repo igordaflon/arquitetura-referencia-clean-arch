@@ -1,5 +1,6 @@
 using Spotifin.Aplicacao;
 using Spotifin.Aplicacao.Servicos;
+using Spotifin.Infraestrutura;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddAplicacao();
+builder.Services.AddAplicacao()
+                .AddInfraestrutura();
 
 var app = builder.Build();
 
