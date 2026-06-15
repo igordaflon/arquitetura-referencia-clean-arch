@@ -1,5 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Spotifin.Aplicacao.Servicos;
+using Spotifin.Aplicacao.Assinaturas.Comandos;
 using Spotifin.Contratos.Assinaturas;
 
 namespace Spotifin.Api.Controllers;
@@ -8,18 +9,19 @@ namespace Spotifin.Api.Controllers;
 [Route("[controller]")]
 public class AssinaturasController : ControllerBase
 {
-    private readonly IAssinaturasServico _assinaturaServico;
+    private readonly ISender _mediator;
 
-    public AssinaturasController(IAssinaturasServico assinaturaServico)
+    public AssinaturasController(ISender mediator)
     {
-        _assinaturaServico = assinaturaServico;
+        _mediator = mediator;
     }
 
-
     [HttpPost]
-    public IActionResult CriarAssinatura(CriarAssinaturaRequest request)
+    public async Task<IActionResult> CriarAssinaturaAsync(CriarAssinaturaRequest request)
     {
-        var assinaturaId = _assinaturaServico.CriarAssinatura(request.TipoAssinatura.ToString(), request.UsuarioId);
+        var comando = new CriarAssinaturaComando(request.TipoAssinatura.ToString(), request.UsuarioId);
+
+        var assinaturaId = await _mediator.Send(comando);
 
         var retorno = new CriarAssinaturaResponse(assinaturaId, request.TipoAssinatura);
 

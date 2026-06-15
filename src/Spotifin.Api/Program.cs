@@ -1,5 +1,4 @@
 using Spotifin.Aplicacao;
-using Spotifin.Aplicacao.Servicos;
 using Spotifin.Infraestrutura;
 
 var builder = WebApplication.CreateBuilder(args);
