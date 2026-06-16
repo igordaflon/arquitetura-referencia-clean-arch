@@ -21,10 +21,10 @@ public class AssinaturasController : ControllerBase
     {
         var comando = new CriarAssinaturaComando(request.TipoAssinatura.ToString(), request.UsuarioId);
 
-        var assinaturaId = await _mediator.Send(comando);
+        var criarAssinaturaResultado = await _mediator.Send(comando);
 
-        var retorno = new CriarAssinaturaResponse(assinaturaId, request.TipoAssinatura);
-
-        return Ok(retorno);
+        return criarAssinaturaResultado.MatchFirst(
+            sucesso => Ok(sucesso),
+            erros => Problem());
     }
 }
