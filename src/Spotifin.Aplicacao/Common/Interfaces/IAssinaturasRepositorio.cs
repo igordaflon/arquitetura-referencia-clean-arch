@@ -5,4 +5,5 @@ namespace Spotifin.Aplicacao.Common.Interfaces;
 public interface IAssinaturasRepositorio
 {
     Task InserirAsync(Assinatura assinatura);
+    Task<Assinatura?> ObterPorIdAsync(Guid id);
 }

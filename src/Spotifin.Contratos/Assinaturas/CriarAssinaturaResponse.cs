@@ -1,6 +1,6 @@
 namespace Spotifin.Contratos.Assinaturas;
 
-public record CriarAssinaturaResponse(
+public record AssinaturaResponse(
     Guid Id,
     TipoAssinaturaEnum TipoAssinatura
 );

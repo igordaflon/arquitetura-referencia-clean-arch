@@ -13,4 +13,11 @@ public class AssinaturasRepositorio : IAssinaturasRepositorio
         
         return Task.CompletedTask;
     }
+
+    public Task<Assinatura?> ObterPorIdAsync(Guid id)
+    {
+        var assinatura = _assinaturas.FirstOrDefault(a => a.Id == id);
+
+        return Task.FromResult(assinatura);
+    }
 }

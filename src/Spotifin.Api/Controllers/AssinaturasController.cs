@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Spotifin.Aplicacao.Assinaturas.Comandos.CriarAssinatura;
+using Spotifin.Aplicacao.Assinaturas.Queries.ObterAssinatura;
 using Spotifin.Contratos.Assinaturas;
 
 namespace Spotifin.Api.Controllers;
@@ -24,7 +25,19 @@ public class AssinaturasController : ControllerBase
         var criarAssinaturaResultado = await _mediator.Send(comando);
 
         return criarAssinaturaResultado.MatchFirst(
-            assinatura => Ok(new CriarAssinaturaResponse(assinatura.Id, request.TipoAssinatura)),
+            assinatura => Ok(new AssinaturaResponse(assinatura.Id, request.TipoAssinatura)),
+            erros => Problem());
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> ObterAssinaturaAsync(Guid id)
+    {
+        var query = new ObterAssinaturaQuery(id);
+
+        var assinaturaResultado = await _mediator.Send(query);
+
+        return assinaturaResultado.MatchFirst(
+            assinatura => Ok(new AssinaturaResponse(assinatura.Id, Enum.Parse<TipoAssinaturaEnum>(assinatura.TipoAssinatura))),
             erros => Problem());
     }
 }

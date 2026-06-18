@@ -22,7 +22,8 @@ public class CriarAssinaturaComandoHandler : IRequestHandler<CriarAssinaturaComa
         // Criar a assinatura usando os dados do comando
         var assinatura = new Assinatura
         {
-            Id = Guid.NewGuid()
+            Id = Guid.NewGuid(),
+            TipoAssinatura = request.TipoAssinatura
         };
 
         // Persistir a assinatura no repositório
