@@ -16,8 +16,6 @@ public class AssinaturasRepositorio : IAssinaturasRepositorio
     public async Task InserirAsync(Assinatura assinatura)
     {
         await _context.Assinaturas.AddAsync(assinatura);
-        
-        await _context.SaveChangesAsync();
     }
 
     public async Task<Assinatura?> ObterPorIdAsync(Guid id)

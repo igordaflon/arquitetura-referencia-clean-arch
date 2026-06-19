@@ -15,6 +15,8 @@ public static class DependencyInjection
 
         servicos.AddScoped<IAssinaturasRepositorio, AssinaturasRepositorio>();
 
+        servicos.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<SpotifinDbContext>());
+
         return servicos;
     }
 }
