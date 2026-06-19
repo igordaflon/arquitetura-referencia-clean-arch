@@ -1,4 +1,4 @@
 @host=http://localhost:5267
-@assinaturaId=9ee95114-edd2-4100-badf-1cd48d8d3273
+@assinaturaId=A024E131-5C27-4540-A719-C05D09D30082
 
 GET {{host}}/Assinaturas/{{assinaturaId}}

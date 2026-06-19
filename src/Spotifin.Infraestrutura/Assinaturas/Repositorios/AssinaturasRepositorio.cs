@@ -1,23 +1,27 @@
 using Spotifin.Aplicacao.Common.Interfaces;
 using Spotifin.Dominio.Assinaturas;
+using Spotifin.Infraestrutura.Common.Contexts;
 
 namespace Spotifin.Infraestrutura.Assinaturas.Repositorios;
 
 public class AssinaturasRepositorio : IAssinaturasRepositorio
 {
-    private readonly static List<Assinatura> _assinaturas = [];
+    private readonly SpotifinDbContext _context;
 
-    public Task InserirAsync(Assinatura assinatura)
+    public AssinaturasRepositorio(SpotifinDbContext context)
     {
-        _assinaturas.Add(assinatura);
-        
-        return Task.CompletedTask;
+        _context = context;
     }
 
-    public Task<Assinatura?> ObterPorIdAsync(Guid id)
+    public async Task InserirAsync(Assinatura assinatura)
     {
-        var assinatura = _assinaturas.FirstOrDefault(a => a.Id == id);
+        await _context.Assinaturas.AddAsync(assinatura);
+        
+        await _context.SaveChangesAsync();
+    }
 
-        return Task.FromResult(assinatura);
+    public async Task<Assinatura?> ObterPorIdAsync(Guid id)
+    {
+        return await _context.Assinaturas.FindAsync(id);
     }
 }
