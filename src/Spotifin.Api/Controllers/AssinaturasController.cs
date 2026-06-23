@@ -20,7 +20,14 @@ public class AssinaturasController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CriarAssinaturaAsync(CriarAssinaturaRequest request)
     {
-        var comando = new CriarAssinaturaComando(request.TipoAssinatura.ToString(), request.UsuarioId);
+        if(!Dominio.Assinaturas.TipoAssinaturaEnum.TryFromName(request.TipoAssinatura.ToString(), out var tipoAssinatura))
+        {
+            return Problem(
+                detail: $"Tipo de assinatura '{request.TipoAssinatura}' não é válido.",
+                statusCode: StatusCodes.Status400BadRequest);
+        }
+
+        var comando = new CriarAssinaturaComando(tipoAssinatura, request.UsuarioId);
 
         var criarAssinaturaResultado = await _mediator.Send(comando);
 
@@ -37,7 +44,7 @@ public class AssinaturasController : ControllerBase
         var assinaturaResultado = await _mediator.Send(query);
 
         return assinaturaResultado.MatchFirst(
-            assinatura => Ok(new AssinaturaResponse(assinatura.Id, Enum.Parse<TipoAssinaturaEnum>(assinatura.TipoAssinatura))),
+            assinatura => Ok(new AssinaturaResponse(assinatura.Id, Enum.Parse<TipoAssinaturaEnum>(assinatura.TipoAssinatura.Name))),
             erros => Problem());
     }
 }
