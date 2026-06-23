@@ -2,8 +2,8 @@ namespace Spotifin.Dominio.Assinaturas;
 
 public class Assinatura
 {
-    public Guid Id { get; }
-    public TipoAssinaturaEnum TipoAssinatura { get; }
+    public Guid Id { get; private set; }
+    public TipoAssinaturaEnum TipoAssinatura { get; private set; }
 
     private readonly Guid _usuarioId;
 
@@ -13,5 +13,6 @@ public class Assinatura
         TipoAssinatura = tipoAssinatura;
         _usuarioId = usuarioId;
     }
-}
 
+    private Assinatura() { }
+}

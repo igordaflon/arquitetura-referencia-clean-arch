@@ -17,4 +17,9 @@ public class SpotifinDbContext : DbContext, IUnitOfWork
     {
         await base.SaveChangesAsync();
     }
+
+    override protected void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(SpotifinDbContext).Assembly);
+    }
 }
