@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Spotifin.Infraestrutura.Common.Contexts;
 
@@ -10,9 +11,11 @@ using Spotifin.Infraestrutura.Common.Contexts;
 namespace Spotifin.Infraestrutura.Migrations
 {
     [DbContext(typeof(SpotifinDbContext))]
-    partial class SpotifinDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260826172853_AddPlaylist")]
+    partial class AddPlaylist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");

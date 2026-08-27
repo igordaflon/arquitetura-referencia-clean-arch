@@ -22,4 +22,10 @@ public class AssinaturasRepositorio : IAssinaturasRepositorio
     {
         return await _context.Assinaturas.FindAsync(id);
     }
+
+    public async Task AtualizarAsync(Assinatura assinatura)
+    {
+        _context.Assinaturas.Update(assinatura);
+        await Task.CompletedTask;
+    }
 }

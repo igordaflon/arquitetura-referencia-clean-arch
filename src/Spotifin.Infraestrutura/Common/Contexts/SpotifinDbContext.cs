@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Spotifin.Aplicacao.Common.Interfaces;
 using Spotifin.Dominio.Assinaturas;
+using Spotifin.Dominio.Playlists;
 
 namespace Spotifin.Infraestrutura.Common.Contexts;
 
@@ -12,6 +13,7 @@ public class SpotifinDbContext : DbContext, IUnitOfWork
     }
 
     public DbSet<Assinatura> Assinaturas { get; set; } = null!;
+    public DbSet<Playlist> Playlists { get; set; } = null!;
 
     public async Task CommitAsync()
     {

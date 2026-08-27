@@ -1,0 +1,9 @@
+@host=http://localhost:5267
+@assinaturaId=663916AB-B302-4CAD-9AB2-843AE9238CA4
+
+POST {{host}}/assinaturas/{{assinaturaId}}/playlists
+Content-Type: application/json
+
+{
+    "Nome": "Minha Playlist 3"
+}

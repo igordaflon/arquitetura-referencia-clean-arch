@@ -6,9 +6,8 @@ using Spotifin.Contratos.Assinaturas;
 
 namespace Spotifin.Api.Controllers;
 
-[ApiController]
 [Route("[controller]")]
-public class AssinaturasController : ControllerBase
+public class AssinaturasController : ApiController
 {
     private readonly ISender _mediator;
 
@@ -31,9 +30,12 @@ public class AssinaturasController : ControllerBase
 
         var criarAssinaturaResultado = await _mediator.Send(comando);
 
-        return criarAssinaturaResultado.MatchFirst(
-            assinatura => Ok(new AssinaturaResponse(assinatura.Id, request.TipoAssinatura)),
-            erros => Problem());
+        return criarAssinaturaResultado.Match(
+            assinatura => CreatedAtAction(
+                nameof(ObterAssinaturaAsync),
+                new { id = assinatura.Id },
+                new AssinaturaResponse(assinatura.Id, request.TipoAssinatura)),
+            Problem);
     }
 
     [HttpGet("{id:guid}")]
@@ -45,6 +47,6 @@ public class AssinaturasController : ControllerBase
 
         return assinaturaResultado.MatchFirst(
             assinatura => Ok(new AssinaturaResponse(assinatura.Id, Enum.Parse<TipoAssinaturaEnum>(assinatura.TipoAssinatura.Name))),
-            erros => Problem());
+            Problem);
     }
 }
