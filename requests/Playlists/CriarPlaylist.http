@@ -5,5 +5,5 @@ POST {{host}}/assinaturas/{{assinaturaId}}/playlists
 Content-Type: application/json
 
 {
-    "Nome": "Minha Playlist 3"
+    "Nome": "Ol"
 }

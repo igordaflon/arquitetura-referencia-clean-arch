@@ -25,13 +25,13 @@ namespace Spotifin.Api.Controllers
             return criarPlaylistResultado.Match(
                 playlist => CreatedAtAction(
                     nameof(ObterPlaylist),
-                    new { assinaturaId, PlaylistId = playlist.Id },
+                    new { PlaylistId = playlist.Id, assinaturaId },
                     new PlaylistResponse(playlist.Id, playlist.Nome)),
                 Problem);
         }
 
         [HttpGet("{playlistId:guid}")]
-        public async Task<IActionResult> ObterPlaylist(Guid assinaturaId, Guid playlistId)
+        public async Task<IActionResult> ObterPlaylist(Guid playlistId, Guid assinaturaId)
         {
             throw new NotImplementedException();
         }
