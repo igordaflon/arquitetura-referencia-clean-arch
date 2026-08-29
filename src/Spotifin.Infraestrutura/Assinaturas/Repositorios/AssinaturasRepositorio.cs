@@ -28,4 +28,10 @@ public class AssinaturasRepositorio : IAssinaturasRepositorio
         _context.Assinaturas.Update(assinatura);
         await Task.CompletedTask;
     }
+
+    public async Task DeletarAsync(Assinatura assinatura)
+    {
+        _context.Assinaturas.Remove(assinatura);
+        await Task.CompletedTask;
+    }
 }

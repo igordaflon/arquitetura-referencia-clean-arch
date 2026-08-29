@@ -19,8 +19,8 @@ public class AssinaturaMapeamento : IEntityTypeConfiguration<Assinatura>
                 tipoAssinatura => tipoAssinatura.Value,
                 value => TipoAssinaturaEnum.FromValue(value));
 
-        builder.Property("_usuarioId")
-            .HasColumnName("UsuarioId");        
+        builder.Property(a => a.UsuarioId)
+            .IsRequired();
 
         builder.Property<List<Guid>>("_playlistIds")
             .HasColumnName("PlaylistIds")

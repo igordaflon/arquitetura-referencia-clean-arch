@@ -8,7 +8,7 @@ public class Assinatura
     public Guid Id { get; private set; }
     public TipoAssinaturaEnum TipoAssinatura { get; private set; }
 
-    private readonly Guid _usuarioId;
+    public Guid UsuarioId {get;}
 
     private readonly List<Guid> _playlistIds = new List<Guid>();
 
@@ -16,7 +16,7 @@ public class Assinatura
     {
         Id = Guid.NewGuid();
         TipoAssinatura = tipoAssinatura;
-        _usuarioId = usuarioId;
+        UsuarioId = usuarioId;
     }
 
     private Assinatura() { }

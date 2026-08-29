@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Spotifin.Aplicacao.Common.Interfaces;
 using Spotifin.Dominio.Assinaturas;
 using Spotifin.Dominio.Playlists;
+using Spotifin.Dominio.Usuario;
 
 namespace Spotifin.Infraestrutura.Common.Contexts;
 
@@ -12,6 +13,7 @@ public class SpotifinDbContext : DbContext, IUnitOfWork
     {
     }
 
+    public DbSet<Usuario> Usuarios { get; set; } = null!;
     public DbSet<Assinatura> Assinaturas { get; set; } = null!;
     public DbSet<Playlist> Playlists { get; set; } = null!;
 

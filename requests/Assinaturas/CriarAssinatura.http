@@ -1,11 +1,11 @@
 @host=http://localhost:5267
-@usuarioId=ae58c71e-5ab8-4d22-992c-5bdc196b8f3f
+@usuarioId=AE58C71E-5AB8-4D22-992C-5BDC196B8F3F
 
 POST {{host}}/Assinaturas
 Content-Type: application/json
 
 {
-    "TipoAssinatura": "Prox", 
+    "TipoAssinatura": "Pro", 
     "UsuarioId": "{{usuarioId}}"
 }
 

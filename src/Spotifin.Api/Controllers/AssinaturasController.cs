@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Spotifin.Aplicacao.Assinaturas.Comandos.CriarAssinatura;
+using Spotifin.Aplicacao.Assinaturas.Comandos.DeletarAssinatura;
 using Spotifin.Aplicacao.Assinaturas.Queries.ObterAssinatura;
 using Spotifin.Contratos.Assinaturas;
 
@@ -47,6 +48,18 @@ public class AssinaturasController : ApiController
 
         return assinaturaResultado.MatchFirst(
             assinatura => Ok(new AssinaturaResponse(assinatura.Id, Enum.Parse<TipoAssinaturaEnum>(assinatura.TipoAssinatura.Name))),
+            Problem);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeletarAssinaturaAsync(Guid id)
+    {
+        var comando = new DeletarAssinaturaComando(id);
+
+        var deletarAssinaturaResultado = await _mediator.Send(comando);
+
+        return deletarAssinaturaResultado.Match(
+            _ => NoContent(),
             Problem);
     }
 }
