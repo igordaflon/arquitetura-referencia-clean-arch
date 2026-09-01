@@ -36,7 +36,7 @@ namespace Spotifin.Aplicacao.Assinaturas.Comandos.DeletarAssinatura
                 return Error.Unexpected(description: "Usuário não encontrado");
             }
 
-            usuario.DeletarAssinatura();
+            usuario.DeletarAssinatura(assinatura.Id);
 
             var playlistsDeletar = await _playlistsRepositorio.ObterPorAssinaturaIdAsync(assinatura.Id);
 

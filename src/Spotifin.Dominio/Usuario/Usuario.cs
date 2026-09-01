@@ -1,10 +1,11 @@
 using ErrorOr;
+using Spotifin.Dominio.Common;
+using Spotifin.Dominio.Usuario.Events;
 
 namespace Spotifin.Dominio.Usuario
 {
-    public class Usuario
+    public class Usuario : Entity
     {
-        public Guid Id { get; private set; }
         public string Nome { get; private set; } = null!;
         public Guid? AssinaturaId { get; private set; } = null;
 
@@ -18,12 +19,15 @@ namespace Spotifin.Dominio.Usuario
             return Result.Success;
         }
 
-        public void DeletarAssinatura()
+        public void DeletarAssinatura(Guid assinaturaId)
         {
             if (AssinaturaId is null)
                 throw new InvalidOperationException("Não é possível remover uma assinatura nula.");
 
             AssinaturaId = null;
+
+            // Domain event: Implementar evento de domínio para notificar que a assinatura foi removida
+            _domainEvents.Add(new AssinaturaDeletadaEvent(assinaturaId));
         }
     }
 }
