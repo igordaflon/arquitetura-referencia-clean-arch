@@ -8,17 +8,14 @@ namespace Spotifin.Aplicacao.Assinaturas.Comandos.DeletarAssinatura
     {
         private readonly IAssinaturasRepositorio _assinaturaRepositorio;
         private readonly IUsuariosRepositorio _usuariosRepositorio;
-        private readonly IPlaylistsRepositorio _playlistsRepositorio;
         private readonly IUnitOfWork _unitOfWork;
 
         public DeletarAssinaturaComandoHandler(IAssinaturasRepositorio assinaturaRepositorio,
                                                IUsuariosRepositorio usuariosRepositorio,
-                                               IPlaylistsRepositorio playlistsRepositorio,
                                                IUnitOfWork unitOfWork)
         {
             _assinaturaRepositorio = assinaturaRepositorio;
             _usuariosRepositorio = usuariosRepositorio;
-            _playlistsRepositorio = playlistsRepositorio;
             _unitOfWork = unitOfWork;
         }
 
@@ -38,11 +35,8 @@ namespace Spotifin.Aplicacao.Assinaturas.Comandos.DeletarAssinatura
 
             usuario.DeletarAssinatura(assinatura.Id);
 
-            var playlistsDeletar = await _playlistsRepositorio.ObterPorAssinaturaIdAsync(assinatura.Id);
 
             await _usuariosRepositorio.AtualizarAsync(usuario);
-            await _assinaturaRepositorio.DeletarAsync(assinatura);
-            await _playlistsRepositorio.DeletarAsync(playlistsDeletar);
             await _unitOfWork.CommitAsync();
 
             return Result.Deleted;
